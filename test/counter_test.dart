@@ -1,41 +1,63 @@
-import "package:flutter_test/flutter_test.dart";
-import "package:flutter_test_proj/counter.dart";
+import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_test_proj/counter.dart';
 
-main() {
-  group('Counter class: ', () {
-    late Counter testCounter = Counter();
+void main() {
+  group('Counter-class', () {
+    late Counter counter;
 
-    setUp(() => {testCounter = Counter()});
-    //GIVEN WHEN THEN
-    test('Given Counter class, when instantiated, then count = 0', () {
-      //ARRANGE
-      int count = testCounter.count;
-      //ASSERT
+    setUp(() => counter = Counter());
+
+    // Given, When, Then
+    test('Given Counter classs, when instanstiated, then counter = 0', () {
+      // Arrange
+      // Act
+      counter = Counter();
+      int count = counter.count;
+      // Assert
       expect(count, 0);
     });
-    //just testing out the group in increment if there are more incrmeent function
-    test(
-        'Given counter class is instantiated, when increment count is called, then count is = 1',
-        () {
-      testCounter.incrementCount();
 
-      expect(testCounter.count, 1);
+    test(
+        'Given the Counter class is instantiated, when calling the incrementCount function, then count = 1',
+        () {
+      // arrange
+
+      // act
+      counter.incrementCount();
+      // assert
+      expect(counter.count, 1);
     });
 
     test(
-        'Given counter class is instantiated, when increment count is called, then count is = 1',
+        'Given the Counter class is instantiated, when calling the incrementCount function, count = -1, if count < 0 fail',
         () {
-      testCounter.decrementCount();
+      // arrange
+      // act
+      counter.decrementCount();
+      // assert
 
-      expect(testCounter.count, -1);
+      expect(counter.count, 0);
     });
 
     test(
-        'Given counter class is instantiated, when reset count is called and when increment count is called, count = 0',
+        'Given the Counter class is instantiated, when calling the incrementCount and resetCount function, then count = 0',
         () {
-      testCounter.incrementCount();
-      testCounter.resetCount();
-      expect(testCounter.count, 0);
+      // arrange
+      // act
+      counter.incrementCount();
+      counter.resetCount();
+      // assert
+      expect(counter.count, 0);
+    });
+    test('Given counter class is instantiated', () {
+      counter.incrementCount();
+      expect(counter.count, 1);
+      counter.incrementCount();
+      expect(counter.count, 3);
+      counter.incrementCount();
+      expect(counter.count, 6);
+      counter.incrementCount();
+      expect(counter.count, 10);
     });
   });
 }
